@@ -4,19 +4,19 @@ import db from '../database';
 
 class GamesController {
     public async list(req: Request, res: Response): Promise<void> {
-        const games = await db.query('SELECT * FROM videojuego');
+        const games = await db.query('SELECT * FROM subcategoria');
         res.json(games);
     }
 
     public async getOne(req: Request, res: Response): Promise<any> {
         const { id } = req.params;
-        const games = await db.query('SELECT * FROM videojuego WHERE COD_VIDEOJUEGO = ?', [id]);
+        const games = await db.query('SELECT * FROM subcategoria WHERE COD_VIDEOJUEGO = ?', [id]);
         res.json(games[0]);
     }
 
     public async create(req: Request, res: Response): Promise<void> {
 
-        await db.query('INSERT INTO videojuego set ?', [req.body]);
+        await db.query('INSERT INTO subcategoria set ?', [req.body]);
         // Envio de parametro
         console.log(req.body);
         res.json({ messasge: 'creando un juego' });
@@ -24,13 +24,13 @@ class GamesController {
 
     public async update(req: Request, res: Response):Promise<void> {
         const { id } = req.params;
-        await db.query('UPDATE videojuego set ? WHERE COD_VIDEOJUEGO = ?', [req.body, id]);
+        await db.query('UPDATE subcategoria set ? WHERE COD_VIDEOJUEGO = ?', [req.body, id]);
         res.json({ messasge: 'actu un juego' });
     }
 
     public async delete(req: Request, res: Response): Promise<void> {
         const { id } = req.params;
-        await db.query('DELETE FROM videojuego WHERE COD_VIDEOJUEGO = ?', [id]);
+        await db.query('DELETE FROM subcategoria WHERE COD_VIDEOJUEGO = ?', [id]);
         res.json({ messge: 'Juego borrado' })
     }
 

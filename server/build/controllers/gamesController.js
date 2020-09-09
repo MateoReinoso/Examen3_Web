@@ -16,20 +16,20 @@ const database_1 = __importDefault(require("../database"));
 class GamesController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const games = yield database_1.default.query('SELECT * FROM videojuego');
+            const games = yield database_1.default.query('SELECT * FROM subcategoria');
             res.json(games);
         });
     }
     getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const games = yield database_1.default.query('SELECT * FROM videojuego WHERE COD_VIDEOJUEGO = ?', [id]);
+            const games = yield database_1.default.query('SELECT * FROM subcategoria WHERE COD_VIDEOJUEGO = ?', [id]);
             res.json(games[0]);
         });
     }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield database_1.default.query('INSERT INTO videojuego set ?', [req.body]);
+            yield database_1.default.query('INSERT INTO subcategoria set ?', [req.body]);
             // Envio de parametro
             console.log(req.body);
             res.json({ messasge: 'creando un juego' });
@@ -38,14 +38,14 @@ class GamesController {
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            yield database_1.default.query('UPDATE videojuego set ? WHERE COD_VIDEOJUEGO = ?', [req.body, id]);
+            yield database_1.default.query('UPDATE subcategoria set ? WHERE COD_VIDEOJUEGO = ?', [req.body, id]);
             res.json({ messasge: 'actu un juego' });
         });
     }
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            yield database_1.default.query('DELETE FROM videojuego WHERE COD_VIDEOJUEGO = ?', [id]);
+            yield database_1.default.query('DELETE FROM subcategoria WHERE COD_VIDEOJUEGO = ?', [id]);
             res.json({ messge: 'Juego borrado' });
         });
     }
